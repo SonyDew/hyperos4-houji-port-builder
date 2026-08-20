@@ -1,0 +1,31 @@
+HyperOS 4 Houji Port Builder Source License 1.0
+
+Copyright (c) 2026 SonyDev (GitHub: SonyDew)
+All rights reserved.
+
+Permission is granted to view this source code and to use or modify it for
+personal, non-commercial purposes, including building firmware for a device
+owned by the user.
+
+Without prior written permission from the copyright holder, you may not:
+
+1. Redistribute, mirror, sublicense, or publish this source code, in whole or
+   in substantial part, whether modified or unmodified.
+2. Distribute firmware, tools, or other builds produced from this source as
+   your own work.
+3. Remove copyright notices, credits, or project attribution, or claim original
+   authorship of this project.
+4. Sell, rent, monetize, or include this project or its output in any paid
+   product or service.
+5. Use the project name, artwork, or the author's identity to imply endorsement.
+
+Small code excerpts may be quoted for review, education, or bug reports when
+the source repository and author are clearly credited.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. USE OF CUSTOM
+FIRMWARE CAN CAUSE DATA LOSS, DEVICE MALFUNCTION, OR A NON-BOOTING DEVICE. THE
+AUTHOR IS NOT LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY ARISING FROM USE
+OF THE SOFTWARE.
+
+This is a source-available license, not an open-source license approved by the
+Open Source Initiative.

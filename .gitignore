@@ -1,0 +1,34 @@
+# ROMs and generated builds
+*.zip
+*.img
+*.bin
+*.new.dat
+*.new.dat.br
+*.br
+*.7z
+*.rar
+*.tar
+*.tgz
+
+# Everything below is local and can be very large
+/input/
+/output/
+/work/
+/local/
+/patches/
+/base_dynamic/
+/tools/
+/config.local.json
+
+# Python and logs
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+venv/
+
+# Editors and Windows
+.idea/
+.vscode/
+Thumbs.db
+Desktop.ini

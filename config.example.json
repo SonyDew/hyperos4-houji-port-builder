@@ -1,0 +1,14 @@
+{
+  "baseline_port_zip": "local/baseline-port.zip",
+  "input_directory": "input",
+  "output_directory": "output",
+  "expected_donor_device": "pudding",
+  "target_device": "houji",
+  "expected_android_release": "17",
+  "expected_sdk": "37",
+  "super_size": 8321499136,
+  "metadata_size": 65536,
+  "metadata_slots": 3,
+  "sparse_chunk_max_bytes": 750000000,
+  "minimum_free_space_gib": 32
+}

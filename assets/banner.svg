@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">HyperOS 4 port builder for Xiaomi 14</title>
+  <desc id="desc">A dark blue banner with a simple phone outline and project name.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.55" stop-color="#102b53"/>
+      <stop offset="1" stop-color="#234f91"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="25%" r="70%">
+      <stop offset="0" stop-color="#69a8ff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#69a8ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="420" rx="32" fill="url(#bg)"/>
+  <rect width="1200" height="420" rx="32" fill="url(#glow)"/>
+  <circle cx="1000" cy="78" r="115" fill="#64a4ff" opacity=".16" filter="url(#shadow)"/>
+  <g transform="translate(860 55)">
+    <rect x="0" y="0" width="166" height="310" rx="35" fill="#091523" stroke="#92c2ff" stroke-width="5"/>
+    <rect x="13" y="15" width="140" height="280" rx="26" fill="#153d71"/>
+    <circle cx="42" cy="49" r="14" fill="#9cc9ff"/>
+    <circle cx="42" cy="49" r="6" fill="#19375d"/>
+    <path d="M38 218 C64 169, 104 247, 137 174" fill="none" stroke="#8fc5ff" stroke-width="8" stroke-linecap="round"/>
+    <path d="M31 246 C70 200, 98 268, 141 221" fill="none" stroke="#f1f7ff" stroke-width="4" stroke-linecap="round" opacity=".75"/>
+  </g>
+  <text x="78" y="146" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="70" font-weight="700">HyperOS 4</text>
+  <text x="80" y="208" fill="#a9cffc" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="2">HOUJI PORT BUILDER</text>
+  <text x="80" y="279" fill="#dcecff" font-family="Segoe UI, Arial, sans-serif" font-size="25">Сборка обновлений для Xiaomi 14 из полной OTA Xiaomi 17</text>
+  <rect x="80" y="320" width="242" height="42" rx="21" fill="#eaf4ff" opacity=".96"/>
+  <text x="112" y="349" fill="#173a68" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">NO ROOT · NO WIPE</text>
+</svg>

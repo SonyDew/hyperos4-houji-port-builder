@@ -1,0 +1,2 @@
+payload_dumper==0.3.0
+protobuf>=5.29,<6

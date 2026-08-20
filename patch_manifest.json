@@ -1,0 +1,24 @@
+{
+  "baseline_donor": "OS4.0.0.9.XPCCNXM",
+  "target_base": "OS3.0.305.0.WNCCNXM",
+  "original_donor_hashes": {
+    "system/system/framework/framework.jar": "ab30b2c82d158e18fa83efb02ce32ba838456832708d2e4e4a26a1fbfecc3bbc",
+    "system/system/framework/services.jar": "0749bf9ef6b076bfdbcb77fddf9688f8456c72a0c5e43ed88afa6c2e978f66a5",
+    "product/priv-app/MiuiCamera/MiuiCamera.apk": "bc8a70f102a0f14c0be6f35d1debcf68d699325c9649a9442d57bf3ab1ec3e85"
+  },
+  "patched_hashes": {
+    "system/system/framework/framework.jar": "d0c4a7ddf55c1f69f9170980dd41763e3ffc9e0528c04beda9b8806587ee3dd9",
+    "system/system/framework/services.jar": "96b31c73fc950987e2465daf6c8fd543bab89cf5752c7a1528191e2e2ae5ae29",
+    "product/etc/device_features/houji.xml": "5ddcc1100d9fb393c83e9ab3c0f3dfe247504223f15652b5a5ef5a398028f99c",
+    "product/overlay/DevicesAndroidOverlay.apk": "538e487d9641beb577940703e5121424d91c436c04fe2377a4cb922e15400bb6",
+    "product/overlay/DevicesOverlay.apk": "6123eb50bb736f4777b16f3f9f068f701c060620350ae58e0f1d21cf5cd863a1",
+    "product/overlay/MiuiFrameworkResOverlay.apk": "1a4e994c625b20cb7f95dcbf4da3b5f84d48de36ab5edcf70dbee69e00025084",
+    "product/priv-app/MiuiCamera/MiuiCamera.apk": "5cd70925b1646cdf31ddb2ef5adea88ca121a6614dc862f8c7dd6df33464f133"
+  },
+  "base_dynamic_hashes": {
+    "odm_a.img": "4003c5970c4d95464ecdaa01cf707cdab0fe6522b558c5061224c30419e0df37",
+    "system_dlkm_a.img": "961cbbaa60796b858492da7951ee66774b23c6bb083468c04aa7feb040a49e9e",
+    "vendor_a.img": "26dc3cc0f44b9a51b104573fd021c1870f8999a3b6e5483c3d27d67e0de9e42c",
+    "vendor_dlkm_a.img": "5dfff7e21e8d395d78c736c56f3c3bad3cf5aa5de2ab54840668e8653756f924"
+  }
+}
