@@ -7,7 +7,7 @@
 <h1 align="center">小米 14（houji）HyperOS 4 移植包构建器</h1>
 
 <p align="center">
-  <img src="assets/banner-zh.png" alt="小米 14 的 HyperOS 4 移植包构建器" width="100%">
+  <img src="assets/banner-zh.svg" alt="小米 14 的 HyperOS 4 移植包构建器" width="100%">
 </p>
 
 <p align="center">

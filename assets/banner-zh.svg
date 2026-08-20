@@ -14,17 +14,17 @@
     <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="18"/>
     </filter>
-    <clipPath id="xiaomi14-clip">
-      <rect x="10" y="0" width="146" height="310" rx="29"/>
-    </clipPath>
   </defs>
   <rect width="1200" height="420" rx="32" fill="url(#bg)"/>
   <rect width="1200" height="420" rx="32" fill="url(#glow)"/>
   <circle cx="1000" cy="78" r="115" fill="#64a4ff" opacity=".16" filter="url(#shadow)"/>
   <g transform="translate(860 55)">
-    <rect x="10" y="0" width="146" height="310" rx="29" fill="#06101d" opacity=".55" filter="url(#shadow)"/>
-    <image href="xiaomi-14.webp" x="8" y="-4" width="150" height="318" preserveAspectRatio="none" clip-path="url(#xiaomi14-clip)"/>
-    <rect x="10" y="0" width="146" height="310" rx="29" fill="none" stroke="#92c2ff" stroke-width="2" opacity=".75"/>
+    <rect x="0" y="0" width="166" height="310" rx="35" fill="#091523" stroke="#92c2ff" stroke-width="5"/>
+    <rect x="13" y="15" width="140" height="280" rx="26" fill="#153d71"/>
+    <circle cx="42" cy="49" r="14" fill="#9cc9ff"/>
+    <circle cx="42" cy="49" r="6" fill="#19375d"/>
+    <path d="M38 218 C64 169, 104 247, 137 174" fill="none" stroke="#8fc5ff" stroke-width="8" stroke-linecap="round"/>
+    <path d="M31 246 C70 200, 98 268, 141 221" fill="none" stroke="#f1f7ff" stroke-width="4" stroke-linecap="round" opacity=".75"/>
   </g>
   <text x="78" y="146" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="70" font-weight="700">HyperOS 4</text>
   <text x="80" y="208" fill="#a9cffc" font-family="Microsoft YaHei, PingFang SC, Noto Sans SC, sans-serif" font-size="34" font-weight="600">HOUJI 移植包构建器</text>
