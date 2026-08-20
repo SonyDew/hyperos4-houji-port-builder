@@ -7,7 +7,7 @@
 <h1 align="center">HyperOS 4 Port Builder for Xiaomi 14 (houji)</h1>
 
 <p align="center">
-  <img src="assets/banner-en.svg" alt="HyperOS 4 Houji Port Builder" width="100%">
+  <img src="assets/banner-en.png" alt="HyperOS 4 Houji Port Builder" width="100%">
 </p>
 
 <p align="center">

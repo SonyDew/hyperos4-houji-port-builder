@@ -7,7 +7,7 @@
 <h1 align="center">Сборщик порта HyperOS 4 для Xiaomi 14 (houji)</h1>
 
 <p align="center">
-  <img src="assets/banner-ru.svg" alt="Сборщик порта HyperOS 4 для Xiaomi 14" width="100%">
+  <img src="assets/banner-ru.png" alt="Сборщик порта HyperOS 4 для Xiaomi 14" width="100%">
 </p>
 
 <p align="center">
