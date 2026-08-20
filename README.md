@@ -1,10 +1,16 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="HyperOS 4 Houji Port Builder" width="100%">
+  <strong>English</strong> ·
+  <a href="README_RU.md">Русский</a> ·
+  <a href="README_ZH.md">简体中文</a>
 </p>
 
 <p align="center">
-  <strong>Сборщик обновлений HyperOS 4 для Xiaomi 14 (houji)</strong><br>
-  Берёт полную China OTA от Xiaomi 17 (pudding) и переносит её поверх уже установленного порта.
+  <img src="assets/banner-en.svg" alt="HyperOS 4 Houji Port Builder" width="100%">
+</p>
+
+<p align="center">
+  <strong>HyperOS 4 update builder for Xiaomi 14 (houji)</strong><br>
+  Takes a full China OTA for Xiaomi 17 (pudding) and turns it into an update for an existing port.
 </p>
 
 <p align="center">
@@ -13,100 +19,100 @@
   <img alt="Device" src="https://img.shields.io/badge/device-houji-4b79d8">
 </p>
 
-## Что это
+## What this is
 
-Это мой рабочий one-click builder для обновления порта HyperOS 4 на Xiaomi 14. Скрипт проверяет OTA, извлекает нужные разделы, накладывает патчи для `houji`, заново собирает `super` и делает готовый ZIP без форматирования `userdata`.
+This is my one-click builder for updating a HyperOS 4 port on Xiaomi 14. It validates the OTA, extracts the required partitions, applies the `houji` patches, rebuilds `super`, and produces an update ZIP without formatting `userdata`.
 
-Текущая база порта — China ROM `OS3.0.305.0.WNCCNXM`. Донор — полный Recovery OTA для Xiaomi 17 (`pudding`) на Android 17.
+The current port base is China ROM `OS3.0.305.0.WNCCNXM`. The donor must be a full Android 17 Recovery OTA for Xiaomi 17 (`pudding`).
 
-Рута и кастомного recovery в сборке нет. Китайские сервисы и функции Xiaomi не вырезаются специально.
+The build does not add root or a custom recovery. Chinese Xiaomi services and features are not intentionally removed.
 
-## Важно
+## Important
 
-Это не официальная прошивка Xiaomi и не универсальный конвертер. Скрипт рассчитан только на связку `houji` + `pudding` и на подготовленную первую версию порта.
+This is not official Xiaomi firmware and it is not a universal ROM converter. The builder is made specifically for `houji` + `pudding` and requires a prepared first version of the port.
 
-- Перед прошивкой сделайте резервную копию.
-- Не прошивайте оригинальную OTA от `pudding` прямо на Xiaomi 14.
-- Обновление задумано без очистки данных, но нулевого риска при работе с портом не бывает.
-- Если проверка устройства, Android SDK, хэшей патчей или структуры ZIP не проходит, сборка останавливается.
+- Back up your data before flashing anything.
+- Never flash the original `pudding` OTA directly on Xiaomi 14.
+- The update is designed to keep user data, but a custom port can never be completely risk-free.
+- The build stops if the device, Android SDK, patch hashes, or ZIP structure do not match.
 
-## Быстрый старт
+## Quick start
 
-Если эта папка лежит рядом с нашей исходной `_port_automation`:
+If this folder is next to our original `_port_automation` workspace:
 
-1. Запустите `LINK_LOCAL_FILES.bat`. Он подключит тяжёлые файлы через NTFS junction и ничего не будет дублировать.
-2. Установите Python-зависимости:
+1. Run `LINK_LOCAL_FILES.bat`. It links the large local files through NTFS junctions without copying them.
+2. Install the Python dependencies:
 
    ```powershell
    py -m pip install -r requirements.txt
    ```
 
-3. Положите новую полную OTA от `pudding` в папку `input` или перетащите ZIP на `BUILD_UPDATE.bat`.
-4. Запустите `BUILD_UPDATE.bat`.
-5. Готовый архив, отчёт и SHA-256 появятся в `output`.
+3. Put one new full `pudding` OTA in `input`, or drag the ZIP onto `BUILD_UPDATE.bat`.
+4. Run `BUILD_UPDATE.bat`.
+5. The update ZIP, build report, and SHA-256 file will appear in `output`.
 
-Можно запустить сборку и вручную:
+You can also start a build manually:
 
 ```powershell
 python build_port_update.py "D:\ROMs\pudding-ota_full-OS4.x.x.x.zip"
 ```
 
-Для обычного клона с GitHub сначала нужно подготовить локальные файлы, перечисленные ниже.
+A regular GitHub clone needs the local files listed below before it can build an update.
 
-## Что нужно на компьютере
+## Requirements
 
-- Windows 10 или 11;
-- Python 3.11 или новее;
-- WSL с дистрибутивом `Ubuntu-22.04`;
-- `simg2simg` внутри WSL;
-- около 32 ГБ свободного места на время сборки;
-- полный Recovery OTA, а не инкрементальный пакет.
+- Windows 10 or 11;
+- Python 3.11 or newer;
+- WSL with the `Ubuntu-22.04` distribution;
+- `simg2simg` installed inside WSL;
+- about 32 GiB of free space during the build;
+- a full Recovery OTA, not a small incremental update.
 
-Локально также нужны:
+The following local files are also required:
 
-- проверенный ZIP первой версии порта;
-- четыре базовых образа `odm`, `system_dlkm`, `vendor`, `vendor_dlkm` от Xiaomi 14;
-- файлы патчей из подготовленной версии порта;
-- `extract.erofs.exe`, `mkfs.erofs.exe` и Linux-бинарник `lpmake`.
+- a verified ZIP of the first port release;
+- the four Xiaomi 14 base images: `odm`, `system_dlkm`, `vendor`, and `vendor_dlkm`;
+- patch files from the prepared port;
+- `extract.erofs.exe`, `mkfs.erofs.exe`, and a Linux `lpmake` binary.
 
-Пути можно переопределить в `config.local.json`. За образец возьмите `config.example.json`.
+Local paths can be overridden in `config.local.json`. Use `config.example.json` as a starting point.
 
-## Где брать прошивки
+## Firmware downloads
 
-Сайты иногда обновляются не одновременно, поэтому всегда сверяйте кодовое имя, регион и полный номер сборки.
+Firmware indexes do not always update at the same time. Check the device codename, region, and full build number before downloading.
 
-### Есть HyperOS 4 Beta
+### HyperOS 4 Beta sources
 
-- **[Mi Firmware — HyperOS 4](https://mifirmware.com/xiaomi-hyperos-4/)** — отдельная таблица HyperOS 4, включая China Beta и Recovery ROM.
-- **[Xiaomi Miui Hellas — HyperOS 4 ROM list](https://xiaomi-miui.gr/hyperos-4-full-changelog-new-features/)** — список первых China Beta-сборок HyperOS 4 со ссылками.
-- **[HyperOS Download by Tech Mukul](https://t.me/miui_hyperos_download)** — Telegram-лента с новыми Stable/Beta-сборками и зеркалами. Ссылку на файл лучше дополнительно сверить с официальным OTA-сервером Xiaomi.
+- **[Mi Firmware — HyperOS 4](https://mifirmware.com/xiaomi-hyperos-4/)** — a dedicated HyperOS 4 table with China Beta and Recovery ROM entries.
+- **[Xiaomi Miui Hellas — HyperOS 4 ROM list](https://xiaomi-miui.gr/hyperos-4-full-changelog-new-features/)** — a list of early HyperOS 4 China Beta builds with download links.
+- **[HyperOS Download by Tech Mukul](https://t.me/miui_hyperos_download)** — a Telegram feed with new Stable/Beta builds and mirrors. Verify mirror links against Xiaomi's official OTA server when possible.
 
-### Обычные Stable, Beta и архивы
+### Stable ROMs and archives
 
-- [MIUIROM — Xiaomi 14 (houji)](https://miuirom.org/phones/xiaomi-14) — Recovery, Fastboot и OTA, включая China `OS3.0.305.0.WNCCNXM`.
-- [XM Firmware Updater — houji](https://xmfirmwareupdater.com/archive/hyperos/houji/) — архив нетронутых официальных HyperOS ROM.
-- [XiaomiROM — houji China](https://xiaomirom.com/en/rom/xiaomi-14-houji-china-fastboot-recovery-rom/) — Stable и старые Weekly/Beta-сборки.
+- [MIUIROM — Xiaomi 14 (houji)](https://miuirom.org/phones/xiaomi-14) — Recovery, Fastboot, and OTA packages, including China `OS3.0.305.0.WNCCNXM`.
+- [XM Firmware Updater — houji](https://xmfirmwareupdater.com/archive/hyperos/houji/) — an archive of untouched official HyperOS ROMs.
+- [XiaomiROM — houji China](https://xiaomirom.com/en/rom/xiaomi-14-houji-china-fastboot-recovery-rom/) — Stable and older Weekly/Beta builds.
 
-Для этого builder нужен именно **полный Recovery OTA от `pudding`**. Fastboot ROM и маленький инкрементальный OTA не подойдут.
+This builder needs a **full Recovery OTA for `pudding`**. A Fastboot ROM or small incremental OTA will not work.
 
-## Почему в GitHub нет прошивки
+## Why the firmware is not in this repository
 
-ROM, `super.img`, патчи, локальные инструменты и результаты сборки занимают гигабайты и могут содержать файлы Xiaomi. Поэтому они намеренно исключены через `.gitignore`.
+ROM archives, `super.img`, patches, local tools, and build output can take many gigabytes and may contain Xiaomi files. They are intentionally excluded through `.gitignore`.
 
-В Git попадают только исходники builder, манифест хэшей, документация и маленькая графика. Локальный pre-commit hook отклонит архив прошивки или любой отслеживаемый файл тяжелее 5 МБ.
+Git only tracks the builder source, hash manifest, documentation, and small graphics. A local pre-commit hook also rejects firmware archives and tracked files larger than 5 MiB.
 
-После обычного клонирования включите его одной командой:
+Enable it after a regular clone:
 
 ```powershell
 git config core.hooksPath .githooks
 ```
 
-## Лицензия
+## License
 
-Код можно изучать, менять и использовать для личной некоммерческой сборки. Перезаливать проект, продавать сборки, убирать авторство или выдавать работу за свою без письменного разрешения нельзя. Полный текст находится в [LICENSE](LICENSE).
+You may study, modify, and use the code for personal, non-commercial builds. Reuploading the project, selling builds, removing attribution, or claiming the work as your own is not allowed without written permission. Read the full terms in [LICENSE](LICENSE).
 
-Это source-available лицензия, а не стандартная open-source лицензия.
+This project uses a source-available license, not a standard open-source license.
 
-## Отказ от ответственности
+## Disclaimer
 
-Проект не связан с Xiaomi. Названия Xiaomi и HyperOS принадлежат их владельцам. Любая прошивка кастомного ПО выполняется на ваш риск.
+This project is not affiliated with Xiaomi. Xiaomi and HyperOS are trademarks of their respective owners. Flashing custom software is always done at your own risk.

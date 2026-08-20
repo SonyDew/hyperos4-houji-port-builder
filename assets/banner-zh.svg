@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-  <title id="title">HyperOS 4 port builder for Xiaomi 14</title>
-  <desc id="desc">A dark blue banner with a simple phone outline and project name.</desc>
+  <title id="title">小米 14 的 HyperOS 4 移植包构建器</title>
+  <desc id="desc">深蓝色横幅，带有手机轮廓和项目名称。</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#07111f"/>
@@ -27,8 +27,8 @@
     <path d="M31 246 C70 200, 98 268, 141 221" fill="none" stroke="#f1f7ff" stroke-width="4" stroke-linecap="round" opacity=".75"/>
   </g>
   <text x="78" y="146" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="70" font-weight="700">HyperOS 4</text>
-  <text x="80" y="208" fill="#a9cffc" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="2">HOUJI PORT BUILDER</text>
-  <text x="80" y="279" fill="#dcecff" font-family="Segoe UI, Arial, sans-serif" font-size="25">Сборка обновлений для Xiaomi 14 из полной OTA Xiaomi 17</text>
+  <text x="80" y="208" fill="#a9cffc" font-family="Microsoft YaHei, PingFang SC, Noto Sans SC, sans-serif" font-size="34" font-weight="600">HOUJI 移植包构建器</text>
+  <text x="80" y="279" fill="#dcecff" font-family="Microsoft YaHei, PingFang SC, Noto Sans SC, sans-serif" font-size="25">基于小米 17 完整 OTA 构建小米 14 更新包</text>
   <rect x="80" y="320" width="242" height="42" rx="21" fill="#eaf4ff" opacity=".96"/>
   <text x="112" y="349" fill="#173a68" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">NO ROOT · NO WIPE</text>
 </svg>
