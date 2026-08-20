@@ -4,6 +4,8 @@
   <a href="README_ZH.md">简体中文</a>
 </p>
 
+<h1 align="center">HyperOS 4 Port Builder for Xiaomi 14 (houji)</h1>
+
 <p align="center">
   <img src="assets/banner-en.svg" alt="HyperOS 4 Houji Port Builder" width="100%">
 </p>
