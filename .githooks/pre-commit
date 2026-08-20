@@ -1,0 +1,2 @@
+#!/bin/sh
+python scripts/check_repo_size.py

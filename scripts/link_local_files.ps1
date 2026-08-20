@@ -51,3 +51,8 @@ $localConfig = [ordered]@{
 }
 $localConfig | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $repo "config.local.json") -Encoding utf8
 Write-Host "Saved config.local.json"
+
+if (Test-Path -LiteralPath (Join-Path $repo ".git")) {
+    git -C $repo config core.hooksPath .githooks
+    Write-Host "Enabled the repository size guard"
+}
