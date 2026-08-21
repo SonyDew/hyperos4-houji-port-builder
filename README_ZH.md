@@ -4,117 +4,140 @@
   <strong>简体中文</strong>
 </p>
 
-<h1 align="center">小米 14（houji）HyperOS 4 移植包构建器</h1>
+<h1 align="center">小米 14 HyperOS 4 移植包构建器</h1>
 
 <p align="center">
   <img src="assets/banner-zh.svg" alt="小米 14 的 HyperOS 4 移植包构建器" width="100%">
 </p>
 
 <p align="center">
-  <strong>小米 14（houji）的 HyperOS 4 更新包构建器</strong><br>
-  使用小米 17（pudding）的完整中国版 OTA，为已安装的移植系统生成更新包。
+  <strong>输入两个官方完整 OTA，输出可刷入的中国版移植包。</strong><br>
+  小米 14 <code>houji</code> 底包 + 小米 17 <code>pudding</code> 供体，不需要现成移植包。
 </p>
 
 <p align="center">
   <img alt="Python 3.11+" src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white">
   <img alt="Windows" src="https://img.shields.io/badge/Windows-10%20%2F%2011-1673D2?logo=windows11&logoColor=white">
   <img alt="设备" src="https://img.shields.io/badge/device-houji-4b79d8">
+  <img alt="输入" src="https://img.shields.io/badge/input-2_official_OTAs-16a34a">
 </p>
 
-## 这是什么
+## 功能说明
 
-这是我为小米 14 的 HyperOS 4 移植系统制作的一键更新包构建器。脚本会校验 OTA、提取所需分区、应用 `houji` 补丁、重新构建 `super`，最后生成不会格式化 `userdata` 的更新 ZIP。
+这是一个真正的小米 14 HyperOS 4 一键移植包构建器，**不需要**已制作好的移植包 ZIP。
 
-当前移植底包是中国版 `OS3.0.305.0.WNCCNXM`。供体必须是小米 17（`pudding`）基于 Android 17 的完整 Recovery OTA。
+脚本会校验并解包两个官方 Recovery OTA，将小米 14 的硬件相关部分与小米 17 的 HyperOS 4 用户空间组合，应用经过验证的 `houji` 兼容配置，重新构建 EROFS 和 `super`，重建 AVB 元数据，并完整校验最终 ZIP。
 
-构建结果不包含 Root，也不加入第三方 Recovery。小米中国版服务和功能不会被特意删除。
+只需要：
 
-## 重要说明
+- 小米 14 中国版完整 OTA：`OS3.0.305.0.WNCCNXM`（`houji`，Android 16）；
+- 小米 17 中国版 HyperOS 4 完整 OTA（`pudding`，Android 17）。
 
-这不是小米官方固件，也不是通用 ROM 转换工具。构建器只适用于 `houji` + `pudding`，并且需要已经准备好的第一版移植包。
+构建结果尽量保持中国版 ROM 原样，不添加 Root 或第三方 Recovery，也不会主动删除小米中国版服务、AI 功能和应用。
 
-- 刷机前请备份重要数据。
-- 不要把 `pudding` 的原始 OTA 直接刷入小米 14。
-- 更新包的设计目标是不清除用户数据，但移植系统始终存在风险。
-- 如果设备、Android SDK、补丁哈希或 ZIP 结构不匹配，构建会立即停止。
+## 输出文件
+
+一次普通构建会在 `output` 中生成两个压缩包：
+
+- `first-install_erase.zip` — 首次安装，刷入小米 14 固件和移植系统，然后清除 `userdata` 与 `metadata`；
+- `update-no-wipe.zip` — 在已安装本项目移植系统的设备上免清数据更新，绝不会刷写基带。
+
+免清数据包只能用于已经完成本项目首次安装的设备。即使使用更新包，也请提前备份。
+
+## 两种基带模式
+
+首次安装脚本会在任何刷写操作之前读取手机的硬件地区。
+
+1. **中国版设备** — 使用所选小米 14 中国版 OTA 内的官方基带，不需要额外确认。
+2. **非中国版设备** — 可以加入可选的实验性基带。它可以工作，但尚未经过长期测试。脚本会显示风险说明；只有用户明确输入 `EXPERIMENTAL` 后才会开始刷写。
+
+实验性基带不会上传到 GitHub。可以把已核验的 IMG 或 ZIP 拖到 `ADD_EXPERIMENTAL_MODEM.bat`，也可以作为第三个文件传给 `BUILD_PORT.bat`。非中国版设备如果没有加入该基带或用户拒绝，首次安装会在修改任何分区之前停止。
 
 ## 快速开始
 
-如果此文件夹与我们原来的 `_port_automation` 工作目录位于同一级：
+1. 安装 [Python 3.11 或更高版本](https://www.python.org/downloads/)，并安装带 Ubuntu 22.04 的 WSL：
 
-1. 运行 `LINK_LOCAL_FILES.bat`。它会通过 NTFS junction 连接大型本地文件，不会重复复制。
-2. 安装 Python 依赖：
+   ```powershell
+   wsl --install -d Ubuntu-22.04
+   ```
+
+2. 在 Ubuntu 中安装 Android sparse image 工具：
+
+   ```bash
+   sudo apt update
+   sudo apt install android-sdk-libsparse-utils
+   ```
+
+3. 安装 Python 依赖：
 
    ```powershell
    py -m pip install -r requirements.txt
    ```
 
-3. 将一个新的 `pudding` 完整 OTA 放入 `input`，或者把 ZIP 拖到 `BUILD_UPDATE.bat` 上。
-4. 运行 `BUILD_UPDATE.bat`。
-5. 更新 ZIP、构建报告和 SHA-256 文件会出现在 `output` 中。
+4. 准备以下本地工具目录：
 
-也可以手动启动构建：
+   ```text
+   tools/
+   ├─ avbtool.py
+   ├─ erofs-utils/
+   │  ├─ extract.erofs.exe
+   │  └─ mkfs.erofs.exe
+   └─ android-tools-static/android-tools-static/
+      ├─ lpmake
+      ├─ lpdump
+      └─ simg2img
+   ```
 
-```powershell
-python build_port_update.py "D:\ROMs\pudding-ota_full-OS4.x.x.x.zip"
-```
+   上游项目：[erofs-utils](https://github.com/erofs/erofs-utils)、[android-tools-static](https://github.com/meator/android-tools-static) 和官方 [Android Platform Tools](https://developer.android.com/tools/releases/platform-tools)。如果工具已放在其他目录，可运行 `LINK_LOCAL_FILES.bat "D:\path\to\tools"` 创建 junction，无需复制。
 
-如果是从 GitHub 普通克隆的仓库，需要先准备下方列出的本地文件。
+5. 将两个官方完整 OTA ZIP 放入 `input`，然后运行 `BUILD_PORT.bat`。也可以直接把两个 ZIP 拖到该 bat 文件上。
 
-## 环境要求
+6. 解压生成的刷机包，让已解锁的小米 14 进入 Fastboot 后运行 `FLASH_FIRST_INSTALL_AND_ERASE.bat`。将官方 `fastboot.exe` 放在脚本旁边，或把 Platform Tools 加入 `PATH`。
 
-- Windows 10 或 11；
-- Python 3.11 或更高版本；
-- 安装了 `Ubuntu-22.04` 发行版的 WSL；
-- WSL 内已安装 `simg2simg`；
-- 构建期间约 32 GiB 可用空间；
-- 完整 Recovery OTA，不能使用小型增量更新包。
+构建期间至少需要 **48 GiB 可用空间**。可用 `config.local.json` 修改路径和 WSL 发行版名称，格式参考 `config.example.json`。
 
-还需要以下本地文件：
+## 版本支持
 
-- 已验证的第一版移植包 ZIP；
-- 小米 14 的四个基础镜像：`odm`、`system_dlkm`、`vendor` 和 `vendor_dlkm`；
-- 从已准备移植包中提取的补丁文件；
-- `extract.erofs.exe`、`mkfs.erofs.exe` 和 Linux 版 `lpmake`。
+`OS4.0.0.9.XPCCNXM` 带有精确并校验哈希的兼容配置。只有源文件完全匹配时，才会应用相机、framework 和 services 的差分补丁。
 
-可以在 `config.local.json` 中覆盖本地路径。请参考 `config.example.json`。
+新的 `pudding` 完整 OTA 也可以在没有现成移植包的情况下尝试构建：脚本会改用原生 `houji` 相机，并暂时保留新供体 framework。它会显示醒目警告，因为结构校验通过不代表已经在真机上验证。完成测试后可为新版本加入独立的验证配置。
+
+目前小米 14 底包固定为 `OS3.0.305.0.WNCCNXM`。
 
 ## 固件下载
 
-不同固件网站的更新时间可能不同。下载前请核对设备代号、地区和完整版本号。
+构建前请核对设备代号、地区、完整版本号和 OTA 类型。
 
-### 提供 HyperOS 4 Beta 的来源
+### 发布 HyperOS 4 Beta 的来源
 
-- **[Mi Firmware — HyperOS 4](https://mifirmware.com/xiaomi-hyperos-4/)** — 单独列出 HyperOS 4，包含中国 Beta 和 Recovery ROM。
-- **[Xiaomi Miui Hellas — HyperOS 4 ROM 列表](https://xiaomi-miui.gr/hyperos-4-full-changelog-new-features/)** — 提供早期 HyperOS 4 中国 Beta 版本和下载链接。
-- **[HyperOS Download by Tech Mukul](https://t.me/miui_hyperos_download)** — 发布新的 Stable/Beta 版本和镜像链接。建议尽量与小米官方 OTA 服务器地址进行核对。
+- **[Mi Firmware — HyperOS 4](https://mifirmware.com/xiaomi-hyperos-4/)**
+- **[Xiaomi Miui Hellas — HyperOS 4 列表](https://xiaomi-miui.gr/hyperos-4-full-changelog-new-features/)**
+- **[HyperOS Download 频道](https://t.me/miui_hyperos_download)** — 社区镜像；如有可能，请优先选择小米官方 OTA 服务器链接。
 
-### 稳定版和固件归档
+### 小米 14 固件归档
 
-- [MIUIROM — 小米 14（houji）](https://miuirom.org/phones/xiaomi-14) — Recovery、Fastboot 和 OTA，包括中国版 `OS3.0.305.0.WNCCNXM`。
-- [XM Firmware Updater — houji](https://xmfirmwareupdater.com/archive/hyperos/houji/) — 未经修改的官方 HyperOS ROM 归档。
-- [XiaomiROM — houji 中国版](https://xiaomirom.com/en/rom/xiaomi-14-houji-china-fastboot-recovery-rom/) — Stable 和较早的 Weekly/Beta 版本。
+- [MIUIROM — 小米 14（houji）](https://miuirom.org/phones/xiaomi-14)
+- [XM Firmware Updater — houji 归档](https://xmfirmwareupdater.com/archive/hyperos/houji/)
+- [XiaomiROM — houji 中国版](https://xiaomirom.com/en/rom/xiaomi-14-houji-china-fastboot-recovery-rom/)
 
-本构建器只接受 **`pudding` 的完整 Recovery OTA**。Fastboot ROM 或小型增量 OTA 无法使用。
+仅支持完整 Recovery OTA。Fastboot ROM 和小型增量更新会被拒绝。
 
-## 为什么仓库里没有固件
+## 安全提示
 
-ROM 压缩包、`super.img`、补丁、本地工具和构建结果可能占用数十 GB，并且可能包含小米的文件，因此它们已通过 `.gitignore` 排除。
+- 必须解锁 Bootloader。生成的 `vbmeta` 会关闭 AVB 验证；使用本移植系统时不要重新上锁，否则可能导致设备变砖。
+- 不要把原始 `pudding` OTA 直接刷入小米 14。
+- 首次安装会永久删除应用、设置和内部存储文件。
+- 刷机脚本会检查连接设备、所需镜像和每条 fastboot 命令，发生错误时立即停止。
+- 本项目非官方且仅适用于指定设备组合，刷写风险由用户自行承担。
 
-Git 只跟踪构建器源码、哈希清单、文档和小型图片。本地 pre-commit hook 还会拒绝固件压缩包以及大于 5 MiB 的跟踪文件。
+## 仓库大小与许可证
 
-普通克隆后可使用以下命令启用它：
+OTA、已解包分区、工具、基带镜像和构建结果均被 `.gitignore` 排除。Git 只保存构建器、小型二进制差分、哈希清单、文档和图片。克隆后可启用大小保护：
 
 ```powershell
 git config core.hooksPath .githooks
 ```
 
-## 许可证
+代码仅允许个人、非商业用途。未经书面许可，不得重新上传项目、销售构建包、删除署名或将本项目据为己有。完整条款见 [LICENSE](LICENSE)。
 
-你可以为个人、非商业用途学习、修改并使用此代码。未经书面许可，不得重新发布项目、出售构建结果、删除署名或将本项目冒充为自己的作品。完整条款请参阅 [LICENSE](LICENSE)。
-
-本项目采用 source-available 许可证，并非标准开源许可证。
-
-## 免责声明
-
-本项目与小米无关。Xiaomi 和 HyperOS 商标归其各自所有者。刷入任何自定义软件均由用户自行承担风险。
+本项目与小米无关。Xiaomi 与 HyperOS 商标归其各自所有者所有。
