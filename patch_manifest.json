@@ -1,24 +1,48 @@
 {
-  "baseline_donor": "OS4.0.0.9.XPCCNXM",
-  "target_base": "OS3.0.305.0.WNCCNXM",
-  "original_donor_hashes": {
-    "system/system/framework/framework.jar": "ab30b2c82d158e18fa83efb02ce32ba838456832708d2e4e4a26a1fbfecc3bbc",
-    "system/system/framework/services.jar": "0749bf9ef6b076bfdbcb77fddf9688f8456c72a0c5e43ed88afa6c2e978f66a5",
-    "product/priv-app/MiuiCamera/MiuiCamera.apk": "bc8a70f102a0f14c0be6f35d1debcf68d699325c9649a9442d57bf3ab1ec3e85"
+  "base_profile": {
+    "version": "OS3.0.305.0.WNCCNXM",
+    "post_build": "Xiaomi/houji/houji:16/BP2A.250605.031.A3/16OS3.1.260727.095052558.QCPECN.S:user/release-keys",
+    "product_file_hashes": {
+      "product/etc/device_features/houji.xml": "5ddcc1100d9fb393c83e9ab3c0f3dfe247504223f15652b5a5ef5a398028f99c",
+      "product/overlay/DevicesAndroidOverlay.apk": "60bb65b7f759cbf8ae3179f351ebdfb8bbcd13953e032470318d5b88628709aa",
+      "product/overlay/DevicesOverlay.apk": "d1db450290dc0c2cc89da968d3dd95cda52c8197ca2b297a4b8f5aa42b977f5f",
+      "product/overlay/MiuiFrameworkResOverlay.apk": "2a75c81d9a150a1f7c2054ef2a71206038580182c634bbed52752d80d7a45d91",
+      "product/priv-app/MiuiCamera/MiuiCamera.apk": "482ec59e74f8f8c6fd27170870612f9087c712dd4b8df4064922d3d1c4c28117"
+    },
+    "patched_vbmeta_hashes": {
+      "vbmeta.img": "89d0b3ec26d1c753fd71dff8d6c0a2b59e9b0eab963643eaac1670e34658455a",
+      "vbmeta_system.img": "3ebf67fe9e72c6215916dcf1b039a619cb7cbc7ebe9d09fa76af8489eb5ae176"
+    }
   },
-  "patched_hashes": {
-    "system/system/framework/framework.jar": "d0c4a7ddf55c1f69f9170980dd41763e3ffc9e0528c04beda9b8806587ee3dd9",
-    "system/system/framework/services.jar": "96b31c73fc950987e2465daf6c8fd543bab89cf5752c7a1528191e2e2ae5ae29",
-    "product/etc/device_features/houji.xml": "5ddcc1100d9fb393c83e9ab3c0f3dfe247504223f15652b5a5ef5a398028f99c",
-    "product/overlay/DevicesAndroidOverlay.apk": "538e487d9641beb577940703e5121424d91c436c04fe2377a4cb922e15400bb6",
-    "product/overlay/DevicesOverlay.apk": "6123eb50bb736f4777b16f3f9f068f701c060620350ae58e0f1d21cf5cd863a1",
-    "product/overlay/MiuiFrameworkResOverlay.apk": "1a4e994c625b20cb7f95dcbf4da3b5f84d48de36ab5edcf70dbee69e00025084",
-    "product/priv-app/MiuiCamera/MiuiCamera.apk": "5cd70925b1646cdf31ddb2ef5adea88ca121a6614dc862f8c7dd6df33464f133"
+  "donor_profiles": {
+    "OS4.0.0.9.XPCCNXM": {
+      "binary_patches": [
+        {
+          "target": "product/priv-app/MiuiCamera/MiuiCamera.apk",
+          "patch": "binary_patches/OS4.0.0.9.XPCCNXM/MiuiCamera.apk.bsdiff",
+          "source_sha256": "bc8a70f102a0f14c0be6f35d1debcf68d699325c9649a9442d57bf3ab1ec3e85",
+          "patch_sha256": "35897ddc90dc8594dd7f51250257b5a26c839d8743845c618ac223aee5b19af0",
+          "output_sha256": "5cd70925b1646cdf31ddb2ef5adea88ca121a6614dc862f8c7dd6df33464f133"
+        },
+        {
+          "target": "system/system/framework/framework.jar",
+          "patch": "binary_patches/OS4.0.0.9.XPCCNXM/framework.jar.bsdiff",
+          "source_sha256": "ab30b2c82d158e18fa83efb02ce32ba838456832708d2e4e4a26a1fbfecc3bbc",
+          "patch_sha256": "bd0d3d60b74d4fad6fb77249fe3cdaecc73c92828ff4d8a60fb475055c06660a",
+          "output_sha256": "d0c4a7ddf55c1f69f9170980dd41763e3ffc9e0528c04beda9b8806587ee3dd9"
+        },
+        {
+          "target": "system/system/framework/services.jar",
+          "patch": "binary_patches/OS4.0.0.9.XPCCNXM/services.jar.bsdiff",
+          "source_sha256": "0749bf9ef6b076bfdbcb77fddf9688f8456c72a0c5e43ed88afa6c2e978f66a5",
+          "patch_sha256": "00adcbf31a8b249dc5e08246f97d51befbbbea9550222f896f66c846af8cc6f7",
+          "output_sha256": "96b31c73fc950987e2465daf6c8fd543bab89cf5752c7a1528191e2e2ae5ae29"
+        }
+      ]
+    }
   },
-  "base_dynamic_hashes": {
-    "odm_a.img": "4003c5970c4d95464ecdaa01cf707cdab0fe6522b558c5061224c30419e0df37",
-    "system_dlkm_a.img": "961cbbaa60796b858492da7951ee66774b23c6bb083468c04aa7feb040a49e9e",
-    "vendor_a.img": "26dc3cc0f44b9a51b104573fd021c1870f8999a3b6e5483c3d27d67e0de9e42c",
-    "vendor_dlkm_a.img": "5dfff7e21e8d395d78c736c56f3c3bad3cf5aa5de2ab54840668e8653756f924"
+  "experimental_modem": {
+    "size": 223334400,
+    "sha256": "ea44893f62dfd38f237f2b52539a65c9db44eed8a4712b3f2148e17131d92404"
   }
 }

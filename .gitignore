@@ -19,6 +19,7 @@
 /base_dynamic/
 /tools/
 /config.local.json
+/work_*.json
 
 # Python and logs
 __pycache__/
